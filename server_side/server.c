@@ -1,5 +1,13 @@
 /*
- * ID Block 
+ * This is the server side application for the fortune teller assignment
+ * in CS440 @ UNA. For this assignment, specifcally, the server will await
+ * a message from the client side that is a yes/no question and will, in
+ * turn, print back out a respone to the console.
+ *
+ * Author: Ethan Smith
+ * Date: 02/07/2025
+ * Course: CS440 - Computer Networking
+ * Professor: Dr. James Jerkins
  */
 
 #include <sys/socket.h>
