@@ -1,5 +1,11 @@
 /*
- * ID Block 
+ * This is the server application to be used for communicating with a client
+ * application and ultimately telling a "fortune".
+ *
+ * Author: Ethan Smith
+ * Date: 02/08/2025
+ * Course: CS440 - Computer Networking
+ * Professor: Dr. James Jerkins 
  */
 
 #include <sys/socket.h>
