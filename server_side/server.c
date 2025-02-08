@@ -68,11 +68,11 @@ int main(void) {
 		if((new_s = accept(s, (struct sockaddr*)&sin, &new_len)) == -1) {
 			close(s);
 			err(4, "accept error");
-		}
+                }
 
 		while((recv(new_s, buf, sizeof buf, 0)) > 0) {
                         printf("%s%s", "Q: ", buf);
-                        printf("%s%s", "R: ", get_response());
+                        printf("%s%s\n", "R: ", get_response());
 			memset(buf, 0, sizeof buf);
 		}
 
