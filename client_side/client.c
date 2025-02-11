@@ -63,8 +63,16 @@ int main(int argc, char* argv[]) {
     while (fgets(buf, sizeof buf, stdin)) {
 	len = strnlen(buf, sizeof buf);
 	send(s, buf, len, 0);
-	memset(buf, 0, sizeof buf);
-        printf("%s", "Enter your (yes/no) question: ");
+	    
+        recv(s, buf, sizeof buf, 0);
+        printf("Q: %s", buf);
+        memset(buf, 0, sizeof buf);
+
+        recv(s, buf, sizeof buf, 0);
+        printf("R: %s", buf);
+        memset(buf, 0, sizeof buf);
+
+        printf("\n%s", "Enter your (yes/no) question: ");
     }
 	
     close(s);

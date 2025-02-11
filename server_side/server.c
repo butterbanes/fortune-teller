@@ -69,8 +69,16 @@ int main(void) {
                 }
 
 		while((recv(new_s, buf, sizeof buf, 0)) > 0) {
-                        printf("%s%s", "Q: ", buf);
-                        printf("%s%s\n", "R: ", get_response());
+                        //printf("%s%s", "Q: ", buf);
+                        //printf("%s%s\n", "R: ", get_response());
+                        //char* temp_buf = "Q: ";
+                        //char* temp_response = "R: ";
+                        //strncat(temp_buf, buf, sizeof "Q: " - strlen("Q: ") - 1);
+                        //strncat(temp_response, get_response(), sizeof "R: " - strlen("R: ") - 1);                
+                        char* response = get_response();                        
+
+                        send(new_s, buf, new_len, 0);
+                        send(new_s, response, strlen(response), 0);
 			memset(buf, 0, sizeof buf);
 		}
 
