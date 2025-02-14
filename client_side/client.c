@@ -21,10 +21,12 @@
 #include <string.h>
 #include <unistd.h>
  
-const int SERVER_PORT = 11421;
+const int SERVER_PORT = 11422; //FIXME: change bcak to 11421
 const int MAX_LINE    = 256;
 const int MAX_PENDING = 5;
- 
+
+void trim_nl(char*);
+
 int main(int argc, char* argv[]) {
     
     char buf[MAX_LINE];
@@ -59,22 +61,21 @@ int main(int argc, char* argv[]) {
     }
 	
     memset(buf, 0, sizeof buf);
+    
     printf("%s", "Enter your (yes/no) question: ");
-    while (fgets(buf, sizeof buf, stdin)) {
-	len = strnlen(buf, sizeof buf);
-	send(s, buf, len, 0);
-	    
-        recv(s, buf, sizeof buf, 0);
-        printf("Q: %s", buf);
-        memset(buf, 0, sizeof buf);
-
-        recv(s, buf, sizeof buf, 0);
-        printf("R: %s", buf);
-        memset(buf, 0, sizeof buf);
-
-        printf("\n%s", "Enter your (yes/no) question: ");
+    if(fgets(buf, sizeof buf, stdin) != NULL) {
+        buf[strcspn(buf, "\n")] = '\0'; //see fgets(3)
     }
-	
+    
+    len = strnlen(buf, sizeof buf);
+    
+    send(s, buf, len, 0);
+    memset(buf, 0, sizeof buf);
+
+    recv(s, buf, sizeof buf, 0);
+    printf("%s", buf);
+    memset(buf, 0, sizeof buf);
+    
     close(s);
     return 0;
 }

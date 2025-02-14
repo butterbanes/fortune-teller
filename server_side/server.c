@@ -20,7 +20,7 @@
 #include <unistd.h>
 
 const int MAX_LINE    = 256;
-const int SERVER_PORT = 11421;
+const int SERVER_PORT = 11422; //FIXME: change back to 11421
 const int MAX_PENDING = 5;
 
 char* get_response();
@@ -69,11 +69,14 @@ int main(void) {
                 }
 
 		while((recv(new_s, buf, sizeof buf, 0)) > 0) {
-                        char* response = get_response();                        
+                        char send_back_string[MAX_LINE];
 
-                        send(new_s, buf, new_len, 0);
-                        send(new_s, response, strlen(response), 0);
+                        snprintf(send_back_string, sizeof send_back_string, "Q: \"%s\"\nR: \"%s\"\n", buf, get_response());
+                        memset(buf, 0, sizeof buf);
+    
+                        send(new_s, send_back_string, strnlen(send_back_string, sizeof send_back_string), 0);
 			memset(buf, 0, sizeof buf);
+
 		}
 
 		close(new_s);
