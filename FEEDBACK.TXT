@@ -1,0 +1,6 @@
+65
+    Test plan in design should be specific - list actual inputs and actual expected outputs
+    server - style issues
+    client - style issues
+    giant switch that returns literal strings is poor design and difficult to maintain code
+    pay attention to warnings
